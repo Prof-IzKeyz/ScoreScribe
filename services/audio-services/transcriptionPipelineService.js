@@ -33,6 +33,7 @@ export async function runTranscriptionPipeline(fileBuffer, originalname) {
 
 		const smoothed = smoothNoteSequence(mappedNotes);
 		const cleanNotes = filterShortNotes(smoothed);
+		
 
 		const key = detectKey(cleanNotes);
 		const noteSequence = transposeToSolfege(cleanNotes, key.tonic);

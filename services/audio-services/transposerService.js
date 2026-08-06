@@ -33,7 +33,18 @@ export function transposeToSolfege(noteSequence, tonic) {
 	const dohMap = buildMoveableDohMap(tonic);
 
 	return noteSequence.map((item) => ({
-		...item,
-		solfege: dohMap[item.note] || null,
+		const transposed = {
+			...item,
+			solfege: dohMap[item.note] || null,
+		}
+
+		if (item.chordTones) {
+			transposed.chordTones = item.chordTones.map((tone) => ({
+				...tone,
+				solfege: dohMap[tone.note] || null,
+			}));
+		}
+
+		return transposed;
 	}));
 }

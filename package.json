@@ -23,5 +23,10 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prof-IzKeyz/ScoreScribe.git"
+  },
+  "homepage": "https://github.com/Prof-IzKeyz/ScoreScribe#readme"
 }

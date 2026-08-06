@@ -63,7 +63,7 @@ export function detectKey(smoothedNotes) {
 
 	for (let rotation = 0; rotation < 12; rotation++) {
 		const rotatedMajor = rotateProfile(MAJOR_PROFILE, rotation);
-		const rotatedMinor = rotateProfile(MAJOR_PROFILE, rotation);
+		const rotatedMinor = rotateProfile(MINOR_PROFILE, rotation);
 
 		const majorScore = correlate(histogram, rotatedMajor);
 		const minorScore = correlate(histogram, rotatedMinor);

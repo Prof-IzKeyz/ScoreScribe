@@ -4,16 +4,8 @@
 import PDFDocument from 'pdfkit';
 
 
-/**
-* @param {import('express').Response} res 
-* @param {Object} options
-* @param {string} options.title
-* @param {string} options.detectedKey
-* @param {string[]} options.lines 
-*/
 
-
-export function streamSolfegePdf(res, { title = 'SolfaScribe Transcription', detectedKey, lines }) {
+export function streamSolfegePdf(res, { title = 'SolfaScribe Transcription', detectedKey, lines, voiceSections }) {
 	const doc = new PDFDocument({ size: 'A4', margin: 50 });
 
 	res.setHeader('Content-Type', 'application/pdf');
@@ -38,11 +30,30 @@ export function streamSolfegePdf(res, { title = 'SolfaScribe Transcription', det
 
 	doc.moveDown(1.5);
 
+
+	const sections = voiceSections || [{ label: null, lines: lines || [] }];
+
+
+	for (const section of sections) {
+	if (section.label) {
+		doc
+		   .fontSize(14)
+		   .font('Helvetica-Bold')
+		   .fillColor('#222222')
+		   .text(section.label, { align: 'left' });
+
+
+		doc.moveDown(0.3);
+	}
+
 	doc.fillColor('#000000').font('Helvetica').fontSize(14);
 
-	for (const line of lines) {
+	for (const line of section.lines) {
 		doc.text(line, { align: 'left', lineGap: 8 });
 	}
+
+	doc.moveDown(1.0);
+  }
 
 	doc.end();
 }

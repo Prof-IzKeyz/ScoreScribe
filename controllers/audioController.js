@@ -49,4 +49,4 @@ export async function transcribeAudioToPdf(req, res) {
 		console.error('PDF export error:', error.message);
 		res.status(500).json({ error: 'Failed to generate PDF.', details: error.message })
 	}
-} 
+}
